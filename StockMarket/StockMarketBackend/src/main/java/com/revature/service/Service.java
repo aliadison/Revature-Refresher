@@ -20,4 +20,15 @@ public class Service {
 	public Stock findById(int id) {
 		return this.repository.findById(id);
 	}
+	
+	public Stock buyStock(Stock targetStock, int quantity) {
+		Stock stock = this.repository.findById(targetStock.getId());
+		if(quantity <= stock.getAvailable_shares() && targetStock.getPrice() >= stock.getPrice()) {
+			stock.setAvailable_shares(stock.getAvailable_shares()-quantity);
+			stock.setPrice(targetStock.getPrice());
+			stock.setMarket_cap(stock.getPrice()*stock.getTotal_supply());
+			return this.repository.save(stock);
+		}
+		return null;
+	}
 }
