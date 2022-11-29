@@ -92,7 +92,7 @@ function App() {
                 if (item.market_cap > marketCapFilter) {
                   return (
                     <li key={item.id} onClick={() => setStock(item)}>
-                      {item.stock_name} {item.symbol} {item.price}
+                      {item.stock_name} {item.symbol} ${item.price}
                     </li>
                   );
                 }
@@ -133,6 +133,12 @@ function App() {
                   variant="contained"
                   color="success"
                   onClick={handleSubmit}
+                  style={{
+                    color: "black",
+                    backgroundColor: "#21b6ae",
+                    padding: "12px 36px",
+                    fontSize: "18px"
+                }}
                 >
                   Buy
                 </Button>
