@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import CancelIcon from '@mui/icons-material/Cancel';
 import "./App.css";
 
 function App() {
@@ -20,6 +23,8 @@ function App() {
       setMessage("Price is less than the market price");
     } else if (quantity > stock.available_shares) {
       setMessage("Not enough shares available");
+    } else if (quantity < 1) {
+      setMessage("Quantity has to be greater than 0");
     } else {
       try {
         let formData = new FormData();
@@ -63,7 +68,7 @@ function App() {
           setError(error);
         }
       );
-  }, []);
+  }, [stock]);
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -87,7 +92,7 @@ function App() {
                 if (item.market_cap > marketCapFilter) {
                   return (
                     <li key={item.id} onClick={() => setStock(item)}>
-                      {item.stock_name} {item.price}
+                      {item.stock_name} {item.symbol} {item.price}
                     </li>
                   );
                 }
@@ -95,8 +100,9 @@ function App() {
               })}
             </ul>
           </div>
+          {stock && (
           <div className="stocksDetail">
-            {stock && (
+              <CancelIcon id="closeBtn" onClick={()=> setStock(null)}/>
               <div>
                 <h1>
                   {stock.stock_name} ({stock.symbol})
@@ -107,29 +113,35 @@ function App() {
                   Available Shares: {stock.available_shares} / Total Shares:{" "}
                   {stock.total_supply}
                 </h3>
-                <form onSubmit={handleSubmit}>
-                  <input
-                    type="text"
-                    value={price}
-                    placeholder="Price"
-                    onChange={(e) => setPrice(e.target.value)}
-                  />
-                  <input
-                    type="text"
-                    value={quantity}
-                    placeholder="Quantity"
-                    onChange={(e) => setQuantity(e.target.value)}
-                  />
-
-                  <button type="submit">Buy</button>
-
-                  <div className="message">
-                    {message ? <p>{message}</p> : null}
-                  </div>
-                </form>
+                <TextField
+                  id="outlined-basic"
+                  label="Price"
+                  variant="outlined"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                />
+        
+                <TextField
+                  id="outlined-basic"
+                  label="Quantity"
+                  variant="outlined"
+                  value={quantity}
+                  onChange={(e) => setQuantity(e.target.value)}
+                />
+              
+                <Button
+                  variant="contained"
+                  color="success"
+                  onClick={handleSubmit}
+                >
+                  Buy
+                </Button>
+                <div className="message">
+                  {message ? <p>{message}</p> : null}
+                </div>
               </div>
-            )}
           </div>
+          )}
         </div>
       </div>
     );

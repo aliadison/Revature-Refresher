@@ -1,5 +1,4 @@
 /* .App {
-  
 } */
 
 .App-header {
@@ -13,11 +12,12 @@
 }
 .stocksList{
   height:100%;
-  background-color: bisque;
+  background-color:bisque;
 }
 .stocksDetail{
   padding: 20px;
-  background-color: rgb(235, 235, 235);
+  background-color: bisque;
+  position: relative;
 }
 
 ul{
@@ -29,4 +29,9 @@ li{
   margin: 3px;
   padding: 20px;
   background-color: aquamarine;
+}
+
+#closeBtn{
+  position: absolute;
+  right: 20px;
 }
