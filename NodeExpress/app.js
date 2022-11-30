@@ -35,11 +35,6 @@ app.get("/repos", function (req, res, next) {
   res.send(repos);
 });
 
-// app.get('/myform', function(req, res){  
-//     var myName = req.query.name;
-//     res.send('Your Text:' + myName);  
-// });  
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
