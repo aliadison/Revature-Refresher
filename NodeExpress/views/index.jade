@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  div
+    form(action='/welcome',method='get')
+          label(for='Name') Name: 
+            input(id='name',type='text',value='',name='name')
+            input(type='submit',value='Enter',data-transition='fade', data-theme='c')
