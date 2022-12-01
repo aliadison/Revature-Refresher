@@ -1,6 +1,8 @@
 package com.revature.service;
 
 
+import java.util.ArrayList;
+
 import com.revature.dao.SuperHeroDao;
 import com.revature.dao.SuperHeroDaoImpl;
 import com.revature.model.Superhero;
@@ -21,6 +23,21 @@ public class SuperheroService {
         this.superHeroDao.save(superhero);
         return superhero;
     }
+    
+    public ArrayList<Superhero> getAll(){
+    	return this.superHeroDao.getAll();
+    }
 
+    public Superhero getById(int id) {
+    	return this.superHeroDao.getById(id);
 
+    }
+    
+    public void updatePower(String power, int id) {
+    	this.superHeroDao.updatePower(power, id);
+    }
+
+    public void deleteHero(int id) {
+    	this.superHeroDao.deleteHero(id);
+    }
 }

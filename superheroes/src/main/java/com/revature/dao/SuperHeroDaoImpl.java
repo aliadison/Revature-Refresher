@@ -52,14 +52,15 @@ public class SuperHeroDaoImpl implements SuperHeroDao{
 
             ResultSet set = preparedStatement.executeQuery();
             if(set.next()) {
-            	String name = set.getString(1);
-            	String power = set.getString(2);
-            	int strength = set.getInt(3);
-            	String weakness = set.getString(4);
-            	String franchise = set.getString(5);
-            	String world = set.getString(6);
+            	int newid = set.getInt(1);
+            	String name = set.getString(2);
+            	String power = set.getString(3);
+            	int strength = set.getInt(4);
+            	String weakness = set.getString(5);
+            	String franchise = set.getString(6);
+            	String world = set.getString(7);
             	
-               	Superhero superhero = new Superhero(id,name,power,strength,weakness,franchise,world);
+               	Superhero superhero = new Superhero(newid,name,power,strength,weakness,franchise,world);
                 return superhero;
             }
         } catch (SQLException e) {
@@ -77,7 +78,7 @@ public class SuperHeroDaoImpl implements SuperHeroDao{
             ResultSet set = preparedStatement.executeQuery();
             
             ArrayList<Superhero> superheroes = new ArrayList<Superhero>();
-            if(set.next()) {
+            while(set.next()) {
             	int id = set.getInt(1);
             	String name = set.getString(2);
             	String power = set.getString(3);
@@ -94,6 +95,40 @@ public class SuperHeroDaoImpl implements SuperHeroDao{
             e.printStackTrace();
         }
         return null;
+	}
+
+	@Override
+	public void updatePower(String power, int id) {
+		String sql = "update superhero set super_power = ? where id = ?";
+		PreparedStatement preparedStatement;
+		try {
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, power);
+			preparedStatement.setInt(2, id);
+
+	        preparedStatement.execute();
+	        
+	        
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void deleteHero(int id) {
+		String sql = "delete from superhero where id = ?";
+		PreparedStatement preparedStatement;
+		try {
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, id);
+
+	        preparedStatement.execute();
+	        
+	        
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
     
     

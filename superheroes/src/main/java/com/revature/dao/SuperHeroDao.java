@@ -11,4 +11,8 @@ public interface SuperHeroDao {
     Superhero getById(int id);
     
     ArrayList<Superhero> getAll();
+    
+    void updatePower(String power, int id);
+    
+    void deleteHero(int id);
 }
