@@ -35,4 +35,10 @@ public class SuperHeroDaoDummyImpl implements SuperHeroDao {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public ArrayList<Superhero> strengthOver(int strength) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

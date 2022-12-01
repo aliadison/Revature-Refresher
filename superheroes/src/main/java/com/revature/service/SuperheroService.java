@@ -40,4 +40,8 @@ public class SuperheroService {
     public void deleteHero(int id) {
     	this.superHeroDao.deleteHero(id);
     }
+    
+    public ArrayList<Superhero> strengthOver(int strength){
+    	return this.superHeroDao.strengthOver(strength);
+    }
 }

@@ -15,4 +15,6 @@ public interface SuperHeroDao {
     void updatePower(String power, int id);
     
     void deleteHero(int id);
+    
+    ArrayList<Superhero> strengthOver(int strength);
 }

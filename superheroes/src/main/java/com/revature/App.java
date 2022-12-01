@@ -22,6 +22,8 @@ public class App
         SuperheroService superheroService = new SuperheroService(DaoFactory.getSuperHeroDao());
 //        superheroService.updatePower("very very rich", 3);
 //        System.out.println(superhero);
-        superheroService.deleteHero(6);
+//        superheroService.deleteHero(6);
+        ArrayList<Superhero> superheroList = superheroService.strengthOver(8);
+        System.out.println(superheroList);
     }
 }

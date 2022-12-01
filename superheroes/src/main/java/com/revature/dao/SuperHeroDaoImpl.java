@@ -130,6 +130,35 @@ public class SuperHeroDaoImpl implements SuperHeroDao{
 		}
 		
 	}
+
+	@Override
+	public ArrayList<Superhero> strengthOver(int strength) {
+		String sql = "select * from superhero where strength > ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, strength);
+            
+            ResultSet set = preparedStatement.executeQuery();
+            
+            ArrayList<Superhero> superheroes = new ArrayList<Superhero>();
+            while(set.next()) {
+            	int id = set.getInt(1);
+            	String name = set.getString(2);
+            	String power = set.getString(3);
+            	int newstrength = set.getInt(4);
+            	String weakness = set.getString(5);
+            	String franchise = set.getString(6);
+            	String world = set.getString(7);
+            	
+               	Superhero superhero = new Superhero(id,name,power,newstrength,weakness,franchise,world);
+                superheroes.add(superhero);
+            }
+            return superheroes;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+	}
     
     
     // Exercise: Fill out 4 other CRUD methods (GetById, GetAll, Update, Delete)
