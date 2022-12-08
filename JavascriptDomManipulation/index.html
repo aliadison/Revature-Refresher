@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Homepage</title>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <h1>Color the box</h1>
+    <div id="box"></div>
+    <button
+      onclick="document.getElementById('box').style.backgroundColor = 'red'"
+    >
+      Red
+    </button>
+    <button
+      onclick="document.getElementById('box').style.backgroundColor = 'green'"
+    >
+      Green
+    </button>
+    <button
+      onclick="document.getElementById('box').style.backgroundColor = 'blue'"
+    >
+      Blue
+    </button>
+
+    <br /><br />   <hr />
+ 
+    <h1>Load Pokemon</h1>
+    <table>
+      <tr>
+        <td>Id</td>
+        <td>Name</td>
+        <td>Height</td>
+        <td>Weight</td>
+      </tr>
+      <tr>
+        <td id="pokemonId"></td>
+        <td id="pokemonName"></td>
+        <td id="pokemonHeight"></td>
+        <td id="pokemonWeight"></td>
+      </tr>
+    </table>
+    <br />
+    <button onclick="fetchPokemon()">Load Pokemon</button>
+
+    <br /><br />    <hr />
+
+    <h1>Rock, Paper, Scissors</h1>
+
+    <h2 id="userPick">You:</h2>
+    <h2 id="computerPick">Computer:</h2>
+    <button onclick="play(1)">Rock</button>
+    <button onclick="play(2)">Paper</button>
+    <button onclick="play(3)">Scissor</button>
+    <h2 id="result">Result:</h2>
+    <script>
+      function fetchPokemon() {
+        fetch("https://pokeapi.co/api/v2/pokemon/ditto")
+          .then((response) => response.json())
+          .then((data) => loadPokemon(data));
+      }
+      function loadPokemon(data) {
+        document.getElementById("pokemonId").innerHTML = data.id;
+        document.getElementById("pokemonName").innerHTML = data.name;
+        document.getElementById("pokemonHeight").innerHTML = data.height;
+        document.getElementById("pokemonWeight").innerHTML = data.weight;
+      }
+
+      function play(num) {
+        let computerNum = getRndInteger();
+        if (num === computerNum) {
+          if (num === 1) {
+            document.getElementById("userPick").innerHTML = "You: Rock";
+            document.getElementById("computerPick").innerHTML =
+              "Computer: Rock";
+          } else if (num === 2) {
+            document.getElementById("userPick").innerHTML = "You: Paper";
+            document.getElementById("computerPick").innerHTML =
+              "Computer: Paper";
+          } else if (num === 3) {
+            document.getElementById("userPick").innerHTML = "You: Scissor";
+            document.getElementById("computerPick").innerHTML =
+              "Computer: Scissor";
+          }
+          document.getElementById("result").innerHTML = "Result: Tie";
+        } else if (num === 1 && computerNum === 2) {
+          document.getElementById("userPick").innerHTML = "You: Rock";
+          document.getElementById("computerPick").innerHTML = "Computer: Paper";
+          document.getElementById("result").innerHTML = "Result: Computer wins";
+        } else if (num === 1 && computerNum === 3) {
+          document.getElementById("userPick").innerHTML = "You: Rock";
+          document.getElementById("computerPick").innerHTML =
+            "Computer: Scissor";
+          document.getElementById("result").innerHTML = "Result: You win";
+        } else if (num === 2 && computerNum === 3) {
+          document.getElementById("userPick").innerHTML = "You: Paper";
+          document.getElementById("computerPick").innerHTML =
+            "Computer: Scissor";
+          document.getElementById("result").innerHTML = "Result: Computer wins";
+        } else if (num === 2 && computerNum === 1) {
+          document.getElementById("userPick").innerHTML = "You: Paper";
+          document.getElementById("computerPick").innerHTML = "Computer: Rock";
+          document.getElementById("result").innerHTML = "Result: You win";
+        } else if (num === 3 && computerNum === 1) {
+          document.getElementById("userPick").innerHTML = "You: Scissor";
+          document.getElementById("computerPick").innerHTML = "Computer: Rock";
+          document.getElementById("result").innerHTML = "Result: Computer wins";
+        } else if (num === 3 && computerNum === 2) {
+          document.getElementById("userPick").innerHTML = "You: Scissor";
+          document.getElementById("computerPick").innerHTML = "Computer: Paper";
+          document.getElementById("result").innerHTML = "Result: You win";
+        }
+      }
+      function getRndInteger() {
+        return Math.floor(Math.random() * 3) + 1;
+      }
+    </script>
+  </body>
+</html>
